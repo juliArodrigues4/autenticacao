@@ -7,7 +7,7 @@ const Stack = createStackNavigator();
 
 export default function Rotas() {
     return(
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="Acesso" component={Acesso}  />
             <Stack.Screen name="Home"   component={Home}    />
         </Stack.Navigator>
