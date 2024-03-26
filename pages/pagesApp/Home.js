@@ -23,13 +23,49 @@ export default function Home({navigation}) {
     });
   }, []);
 
-  return (
-    <View style={styles.container}>
-        <View>
-          <Text>Lista de dias</Text>  
-        </View>  
-    </View>
-  );
+    <FlatList
+    data={diario}
+    renderItem={({item})=>{
+      return(
+        <View style={styles.container}>
+          <TouchableOpacity onPress={() => navigation.navigate("alterarDiario", {
+            id: item.id,
+            banda: item.artistaBanda,
+            genero: item.genero,
+            musica: item.musica
+          })}>
+
+            <View>
+              <Text> Artista/Banda: 
+                <Text>{item.artistaBanda}</Text> 
+              </Text>
+
+              <Text> Gênero: 
+                <Text> {item.genero} </Text>
+              </Text>
+
+              <Text> Musica: 
+                <Text> {item.musica} </Text>
+              </Text>
+
+            </View>
+          </TouchableOpacity>
+
+          <View>
+            <TouchableOpacity onPress={() => {deleteMusica(item.id)}}>
+                <MaterialCommunityIcons name="delete-empty" size={70} color="red" />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+      );
+
+      <TouchableOpacity onPress={() => navigation.navigate("cadastroMusica")}>
+          <MaterialCommunityIcons name="plus-circle-otline" size={70} color="green" />
+      </TouchableOpacity>
+
+    }}/>
+
 }
 
 const styles = StyleSheet.create({
