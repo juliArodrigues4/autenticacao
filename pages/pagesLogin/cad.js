@@ -1,24 +1,18 @@
 import { useState }  from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 
-export default function Acesso({navigation}) {
-
-  const [email, setEmail ] = useState('');
-  const [senha, setSenha ] = useState('');
-  const [ signInWithEmailAndPassword, user, loading, error ] = 
-  useSignInWithEmailAndPassword(auth); 
-
-    // useEffect(()=> {
-    //     onAuthStateChanged(auth, function(user){
-    //         setUser(user);
-    //         if(initializing) setInitializing(false);
-    //     })
-    // }, [])
+export default function Cad({navigation}) {
+    
+        const [email, setEmail] = useState('');
+        const [senha, setSenha] = useState('');
+        const [ createUserWithEmailAndPassword,
+          user, loading, error, ] = 
+        useCreateUserWithEmailAndPassword(auth);
 
     function handleSignIn(){
-      signInWithEmailAndPassword(email, senha);
+        createUserWithEmailAndPassword(email, senha);
     
       if(loading){
         return <View style={styles.loading}>
@@ -27,17 +21,17 @@ export default function Acesso({navigation}) {
       }
 
       if(user) {
-          return navigation.navigate('Home');
+          return navigation.navigate('Acesso');
       }
 
       if(error){
-        return <Text>Os dados estão incorretos. Tente novamente</Text>
+        return <Text>Os dados não foram inseridos no banco. Tente novamente</Text>
       }
     }
 
   return (
     <View style={styles.container}>
-        <Text style={styles.title}> Agenda de Contatos </Text>
+        <Text style={styles.title}> Cadastre-se </Text>
 
         <TextInput style={styles.txInput}
             placeholder="Digite o email"
@@ -46,7 +40,8 @@ export default function Acesso({navigation}) {
         />
 
         <TextInput style={styles.txInput}
-            placeholder="Digite a senha"
+            placeholder="Crie uma senha"
+            secureTextEntry
             onChangeText={(senha)=>setSenha(senha)}
             value={senha}
         />
@@ -55,7 +50,7 @@ export default function Acesso({navigation}) {
             onPress={()=>{
               handleSignIn();
         }}>
-                <Text  style={styles.txBot}>Logar</Text>
+                <Text  style={styles.txBot}>Criar</Text>
         </TouchableOpacity>
     </View>
   );
