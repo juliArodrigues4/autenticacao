@@ -58,6 +58,14 @@ export default function Acesso({navigation}) {
         }}>
                 <Text  style={styles.txBot}>Logar</Text>
         </TouchableOpacity>
+
+        <View style={styles.link}>
+          <TouchableOpacity onPress={() => navigation.navigate("Cad")}>
+            <Text style={styles.linkTexto}>
+              Não tem uma conta? Clique aqui
+            </Text>
+          </TouchableOpacity>
+        </View>
     </View>
   );
 }
@@ -100,6 +108,12 @@ const styles = StyleSheet.create({
     color: '#220511',
     fontSize: 18
   },
+  link:{
+    marginTop: 15,
+  },
+  linkTexto:{
+    fontSize: 16
+  }
 
 });
 

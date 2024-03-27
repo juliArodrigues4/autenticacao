@@ -1,5 +1,5 @@
 import { useState }  from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Linking } from 'react-native';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 
@@ -52,6 +52,14 @@ export default function Cad({navigation}) {
         }}>
                 <Text  style={styles.txBot}>Criar</Text>
         </TouchableOpacity>
+
+        <View style={styles.link}>
+          <TouchableOpacity onPress={() => navigation.navigate("Acesso")}>
+            <Text style={styles.linkTexto}>
+              Já tem uma conta? Clique aqui
+            </Text>
+          </TouchableOpacity>
+        </View>
     </View>
   );
 }
@@ -94,6 +102,12 @@ const styles = StyleSheet.create({
     color: '#220511',
     fontSize: 18
   },
+  link:{
+    marginTop: 15,
+  },
+  linkTexto:{
+    fontSize: 16
+  }
 
 });
 

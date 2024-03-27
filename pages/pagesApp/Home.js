@@ -23,48 +23,60 @@ export default function Home({navigation}) {
     });
   }, []);
 
-    <FlatList
-    data={diario}
-    renderItem={({item})=>{
-      return(
-        <View style={styles.container}>
-          <TouchableOpacity onPress={() => navigation.navigate("alterarDiario", {
-            id: item.id,
-            banda: item.artistaBanda,
-            genero: item.genero,
-            musica: item.musica
-          })}>
+  return(
 
-            <View>
-              <Text> Artista/Banda: 
-                <Text>{item.artistaBanda}</Text> 
-              </Text>
+    <View style={styles.container}>
+      <Text style={styles.title}> Meu diário </Text>
+ 
 
-              <Text> Gênero: 
-                <Text> {item.genero} </Text>
-              </Text>
+      <FlatList
+      data={diario}
+      renderItem={({item})=>{
+        return(
 
-              <Text> Musica: 
-                <Text> {item.musica} </Text>
-              </Text>
+          <View style={styles.musica}>
+            <TouchableOpacity  onPress={() => navigation.navigate("alterarDiario", {
+              id: item.id,
+              banda: item.artistaBanda,
+              genero: item.genero,
+              musica: item.musica
+            })}>
+
+              <View style={styles.musica}>
+                <Text style={styles.musica}> Artista/Banda: 
+                  <Text style={styles.musica}>{item.artistaBanda}</Text> 
+                </Text>
+
+                <Text style={styles.musica}> Gênero: 
+                  <Text style={styles.musica}> {item.genero} </Text>
+                </Text>
+
+                <Text style={styles.musica}> Musica: 
+                  <Text style={styles.musica}> {item.musica} </Text>
+                </Text>
+
+              </View>
+            </TouchableOpacity>
+
+            <View style={styles.botaoDeletar}>
+              <TouchableOpacity onPress={() => {deleteMusica(item.id)}}>
+                  <MaterialCommunityIcons name="delete-empty" size={70} color="red" />
+              </TouchableOpacity>
+            </View>
 
             </View>
+
+            );
+          }}
+          />
+
+          <TouchableOpacity onPress={() => navigation.navigate("cadastroMusica")}>
+              <MaterialCommunityIcons name="plus-circle-otline" size={70} color="green" />
           </TouchableOpacity>
 
-          <View>
-            <TouchableOpacity onPress={() => {deleteMusica(item.id)}}>
-                <MaterialCommunityIcons name="delete-empty" size={70} color="red" />
-            </TouchableOpacity>
-          </View>
-        </View>
-
-      );
-
-      <TouchableOpacity onPress={() => navigation.navigate("cadastroMusica")}>
-          <MaterialCommunityIcons name="plus-circle-otline" size={70} color="green" />
-      </TouchableOpacity>
-
-    }}/>
+    </View>
+ 
+    );
 
 }
 
